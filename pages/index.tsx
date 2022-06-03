@@ -4,8 +4,8 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <p>HOPME AREA</p>
+    <div>
+      <p>HOME AREA</p>
     </div>
   );
 }
