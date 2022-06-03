@@ -37,6 +37,21 @@ const NAV_MENU = [
   },
 ];
 
+const MUSIC_MENU = [
+  {
+    name: "Create Playlist",
+    icon: MdPlaylistAdd,
+    route: "/",
+  },
+  {
+    name: "Favorite",
+    icon: MdFavorite,
+    route: "/favorite",
+  },
+];
+
+const playlists = new Array(25).fill(1).map((_, i) => `Play List ${i + 1}`);
+
 const Sidebar = () => {
   return (
     <Box
@@ -46,7 +61,7 @@ const Sidebar = () => {
       paddingX="5px"
       color="gray"
     >
-      <Box paddingY="20px">
+      <Box paddingY="20px" height="100%">
         <Box width="120px" marginBottom="20px" paddingY="20px">
           <NextImage src="/b-logo-png-white.png" width={50} height={80} />
         </Box>
@@ -66,6 +81,45 @@ const Sidebar = () => {
                         />
                         {menu.name}
                       </LinkOverlay>
+                    </NextLink>
+                  </LinkBox>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+        <Box marginBottom="20px">
+          <List spacing={2}>
+            {MUSIC_MENU.map((music) => {
+              return (
+                <ListItem paddingX="20px" fontSize="16px" key={music.name}>
+                  <LinkBox>
+                    <NextLink href={music.route} passHref>
+                      <LinkOverlay>
+                        <ListIcon
+                          as={music.icon}
+                          color="white"
+                          marginRight="20px"
+                        />
+                        {music.name}
+                      </LinkOverlay>
+                    </NextLink>
+                  </LinkBox>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Box>
+        <Divider color="gray.800" />
+
+        <Box height="66%" overflowY="auto" paddingY="20px">
+          <List spacing={2}>
+            {playlists.map((playlist) => {
+              return (
+                <ListItem paddingX="20px" key={playlist}>
+                  <LinkBox>
+                    <NextLink href="/" passHref>
+                      <LinkOverlay>{playlist}</LinkOverlay>
                     </NextLink>
                   </LinkBox>
                 </ListItem>
