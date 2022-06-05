@@ -63,7 +63,7 @@ const Sidebar = () => {
     >
       <Box paddingY="20px" height="100%">
         <Box width="120px" marginBottom="20px" paddingY="20px">
-          <NextImage src="/b-logo-png-white.png" width={50} height={80} />
+          <NextImage src="/musicfy-logo-white.png" width={220} height={200} />
         </Box>
 
         <Box marginBottom="20px">
