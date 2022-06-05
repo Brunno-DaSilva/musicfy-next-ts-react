@@ -4,6 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 - Front-end Masters
 - Notion: https://tinted-gym-f99.notion.site/Fullstack-course-notes-Students-3202660c315b438aba6c1ae051963572
+- My Notion notes - https://www.notion.so/Spotify-Clone-Musicfy-7faca2ecccfa469ca08334b0c6fa63be
 
 ## Getting Started
 
