@@ -2,14 +2,55 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../lib/prisma";
 
 /*
 Strategy: 
-[ ] User sends credentials
+[x] User sends credentials
 [ ] Attempt to create a new user with credentials and a rash password
-[ ] Either create the user or not generate feedback to user weather it fails or not. 
+[ ] Either create the user or not generate feedback to user whether it fails or not. 
 [ ] Place the jsonwebtoken into the cookie to be store in the browser
 jsonwebtoken stores - user credentials - name, email, role, etc.
 */
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {};
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const salt = bcrypt.genSaltSync();
+  const { email, password } = req.body;
+
+  let user;
+
+  try {
+    user = await prisma.user.create({
+      data: {
+        email,
+        password: bcrypt.hashSync(password, salt),
+      },
+    });
+  } catch (e) {
+    res.status(401);
+    res.json({ error: "User already Exist" });
+    console.error(e);
+    return;
+  }
+  const token = jwt.sign(
+    {
+      email: user.email,
+      id: user.id,
+      time: Date.now(),
+    },
+
+    "hello",
+    { expiresIn: "8h" }
+  );
+
+  res.setHeader(
+    "Set-Cookie",
+    cookie.serialize("MUSICFY_ACCESS_TOKEN", token, {
+      httpOnly: true,
+      maxAge: 8 * 60 * 60,
+      path: "/",
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    })
+  );
+};
