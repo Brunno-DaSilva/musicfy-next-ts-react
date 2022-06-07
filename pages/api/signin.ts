@@ -9,7 +9,6 @@ Strategy:
 [ ] Expect an Email and Password 
 [ ] Check to see if the email already exist against the users in db
 [ ] Validate the user
-[ ] 
 */
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
